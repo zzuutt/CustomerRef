@@ -1,0 +1,133 @@
+<style>
+.command {
+  font-style:italic;
+  font-weight:bold;
+  color: #0066CC;  
+}
+.param {
+  font-style:italic;
+  font-weight:bold;
+  color:#FF6600;
+}
+</style>
+<div class="row">
+    <div class="col-md-12 general-block-decorator">
+        <div class="row">
+            <div class="col-md-12 title title-without-tabs">
+                {intl d='customerref.ai' l="Custumer ref Configuration"}
+            </div>
+        </div>
+
+        <div class="form-container">
+            <div class="row">
+                <div class="col-md-12">
+                    {form name="customerref_configuration"}
+
+                        <form action="{url path="/admin/module/CustomerRef/configure"}" method="post">
+                            {form_hidden_fields form=$form}
+
+                            {include file = "includes/inner-form-toolbar.html"
+                            hide_flags = true
+                            page_url   = "{url path='/admin/module/CustomerRef'}"
+                            close_url  = "{url path='/admin/modules'}"
+                            }
+
+                            {if $form_error}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-danger">{$form_error_message}</div>
+                                    </div>
+                                </div>
+                            {/if}
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {form_field form=$form field="customer"}
+                                    <div class="form-group {if $error}has-error{/if}">
+                                        <label for="{$label_attr.for}" class="control-label">
+                                            {$label} {if $required} <span class="required">*</span>{/if}
+
+                                            {form_error form=$form field="customer"}
+                                                <br />
+                                                <span class="error">{$message}</span>
+                                            {/form_error}
+                                        </label>
+                                        <input type="text" {if $required}aria-required="true" required{/if} placeholder="{$label}" id="{$label_attr.for}" name="{$name}" value="{$value}" class="form-control" />
+                                    </div>
+                                    {/form_field}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {form_field form=$form field="Comparecustomer"}
+                                    <div class="form-group {if $error}has-error{/if}">
+                                        <label for="{$label_attr.for}" class="control-label">
+                                            {$label} {if $required} <span class="required">*</span>{/if}
+
+                                            {form_error form=$form field="Comparecustomer"}
+                                                <br />
+                                                <span class="error">{$message}</span>
+                                            {/form_error}
+                                        </label>
+                                        <input type="text" {if $required}aria-required="true" required{/if} placeholder="{$label}" id="{$label_attr.for}" name="{$name}" value="{$value}" class="form-control" />
+                                    </div>
+                                    {/form_field}
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                                &nbsp;<br />
+                                                <span class="error">&nbsp;</span>
+                                        </label>
+                                        &lt;&gt;
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    {form_field form=$form field="Maskcomparecustomer"}
+                                    <div class="form-group {if $error}has-error{/if}">
+                                        <label for="{$label_attr.for}" class="control-label">
+                                            {$label} {if $required} <span class="required">*</span>{/if}
+
+                                            {form_error form=$form field="Maskcomparecustomer"}
+                                                <br />
+                                                <span class="error">{$message}</span>
+                                            {/form_error}
+                                        </label>
+                                        <input type="text" {if $required}aria-required="true" required{/if} placeholder="{$label}" id="{$label_attr.for}" name="{$name}" value="{$value}" class="form-control" />
+                                    </div>
+                                    {/form_field}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-8">
+                                    {form_field form=$form field="Maskcustomer"}
+                                    <div class="form-group {if $error}has-error{/if}">
+                                        <label for="{$label_attr.for}" class="control-label">
+                                            {$label} {if $required} <span class="required">*</span>{/if}
+
+                                            {form_error form=$form field="Maskcustomer"}
+                                                <br />
+                                                <span class="error">{$message}</span>
+                                            {/form_error}
+                                        </label>
+                                        <input type="text" {if $required}aria-required="true" required{/if} placeholder="{$label}" id="{$label_attr.for}" name="{$name}" value="{$value}" class="form-control" />
+                                    </div>
+                                    {/form_field}
+                                </div>
+                            </div>
+                            
+                        </form>
+                    {/form}
+
+            </div>
+        </div>
+        <div>
+          <h4>{intl l="Commande disponible :" d="ordernumber.ai"}</h4>
+          <p><span class="command">&lcub;value&rcub;</span> : affiche la valeur <span class="param">value</span> correspondant au numéro de facture. Il est incrementé de 1 à chaque facture payée.</p>
+          <p><span class="command">&lcub;Date(mask)&rcub;</span> : Vous pouvez mettre tous les <span class="param">mask</span> disponibles de la fonction php.</p>
+          <p><span class="command">&lcub;PadStr(string1,int,string2,LEFT|RIGHT|BOTH)&rcub;</span> : permet de completer la chaine <span class="param">string1</span> jusqu'à une taille <span class="param">int</span> avec la chaine <span class="param">string2</span>, à gauche <span class="param">LEFT</span>, à doite <span class="param">RIGHT</span> ou des deux cotés <span class="param">BOTH</span>. Identique à la fonction php str_pad.</p>
+        </div>
+        
+    </div>
