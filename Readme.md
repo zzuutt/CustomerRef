@@ -1,7 +1,8 @@
 # Customer Ref module
 
 This module allows you to manage the customer reference.
-compatible Thelia 2.0
+
+**compatible Thelia 2.0**
 
 ## Installation
 
