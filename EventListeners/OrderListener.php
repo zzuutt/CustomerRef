@@ -29,9 +29,6 @@ class OrderListener implements EventSubscriberInterface
     {
         $customer = $event->getCustomer();
         
-        
-        //if ($order->isPaid() && null === $order->getCustomerRef()) {
-        
             //customerRef -> (compteur) valeur correspondant au nombre de client
             $customerRef = ConfigQuery::create()
                 ->findOneByName('customerRef');
@@ -52,7 +49,7 @@ class OrderListener implements EventSubscriberInterface
             $Maskvalue = $MaskcustomerRef->getValue();
             Tlog::getInstance()->debug("Masque numero client :".$Maskvalue);
 
-            //MaskComparecustomerRef -> masque de comparaison a la valeur de comparaison pour remettre a zero du compteur
+            //MaskComparecustomerRef -> masque de comparaison a la valeur de comparaison pour remettre a zero le compteur
             $MaskComparecustomerRef = ConfigQuery::create()
                 ->findOneByName('MaskComparecustomerRef');
             
@@ -60,7 +57,7 @@ class OrderListener implements EventSubscriberInterface
                 throw new \RuntimeException("you must set an maskcomparecustomerref in your admin panel");
             }
             $MaskComparevalue = $MaskComparecustomerRef->getValue();            
-            Tlog::getInstance()->debug("Masque Compare numero client :".$MaskComparevalue);
+            Tlog::getInstance()->debug("Masque Comparaison numero client :".$MaskComparevalue);
 
             $valeurMaskComparevalue = str_replace('{value}', $value, $MaskComparevalue);
             $valeurMaskComparevalue = preg_replace_callback('/{Date[(](.*?)[)]}/',
@@ -74,7 +71,7 @@ class OrderListener implements EventSubscriberInterface
                             if($m[4] == 'BOTH') return str_pad($m[1],$m[2],"$m[3]",STR_PAD_BOTH);
                         }, $valeurMaskComparevalue);
             
-            //ComparecustomerRef -> valeur de comparaison pour remettre a zero du compteur
+            //ComparecustomerRef -> valeur de comparaison pour remettre a zero le compteur
             $ComparecustomerRef = ConfigQuery::create()
                 ->findOneByName('ComparecustomerRef');
             
@@ -82,9 +79,10 @@ class OrderListener implements EventSubscriberInterface
                 throw new \RuntimeException("you must set an comparecustomerref in your admin panel");
             }
             $Comparevalue = $ComparecustomerRef->getValue();            
-            Tlog::getInstance()->debug("Compare numero client :".$Comparevalue);
+            Tlog::getInstance()->debug("Valeur Comparaison numero client :".$Comparevalue);
             
             if($valeurMaskComparevalue <> $Comparevalue) {
+              Tlog::getInstance()->debug("Masque comparaison <> Valeur Comparaison numero client");
               $value=0;
               $ComparecustomerRef->setValue($valeurMaskComparevalue)->save();
             }
@@ -102,9 +100,9 @@ class OrderListener implements EventSubscriberInterface
                         }, $newcustomer);
             $nouvellecustomerRef = $newcustomer;
             Tlog::getInstance()->debug("Numero de client :".$nouvellecustomerRef);
-            //Tlog::getInstance()->debug("Numero de facture :".$value);
-
+            //save New ref in the table customer
             $customer->setref($nouvellecustomerRef)->save();
+            //increment value customerRef
             $customerRef->setValue(++$value)->save();
         //}
     }
