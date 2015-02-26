@@ -24,7 +24,7 @@
     </commands>
 
     <services>
-        <service id="customerRef.listener" class="CustomerRef\EventListeners\OrderListener">
+        <service id="customerRef.listener" class="CustomerRef\EventListeners\CustomerListener">
             <tag name="kernel.event_subscriber"/>
         </service>
     </services>
