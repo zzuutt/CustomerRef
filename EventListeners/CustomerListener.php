@@ -22,7 +22,7 @@ use Thelia\Log\Tlog;
  * @package CustomerRef\EventListeners
  * @author zzuutt <zzuutt34@free.fr>
  */
-class OrderListener implements EventSubscriberInterface
+class CustomerListener implements EventSubscriberInterface
 {
 
     public function implementCustomer(CustomerEvent $event)
