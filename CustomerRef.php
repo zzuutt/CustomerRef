@@ -26,6 +26,21 @@ class CustomerRef extends BaseModule
      *
      * Have fun !
      */
+     
+    public function preActivation(ConnectionInterface $con = null)
+    {
+        /* THELIA VERSION */
+        $thelia_major_version = ConfigQuery::read('thelia_major_version');
+
+        $thelia_minus_version = ConfigQuery::read('thelia_minus_version');
+
+        /* Check THELIA VERSION */
+        if ($thelia_major_version == 2 && $thelia_minus_version < 1) {
+            return true;
+        }
+
+        return false;
+    }
 
     public function postActivation(ConnectionInterface $con = null)
     {
