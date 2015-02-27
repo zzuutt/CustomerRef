@@ -31,7 +31,6 @@ class CustomerRef extends BaseModule
     {
         /* THELIA VERSION */
         $thelia_major_version = ConfigQuery::read('thelia_major_version');
-
         $thelia_minus_version = ConfigQuery::read('thelia_minus_version');
 
         /* Check THELIA VERSION */
